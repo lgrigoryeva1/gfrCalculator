@@ -1,0 +1,60 @@
+﻿<Window x:Class="gfrCalculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:gfrCalculator"
+        mc:Ignorable="d"
+        Title="{DynamicResource m_Title}" Height="350" Width="525">
+    <Grid>
+        <Menu>
+            <MenuItem x:Name="menuLanguage" Header="{DynamicResource m_Language}"/>
+        </Menu>
+        <TextBlock HorizontalAlignment="Left" Margin="44,49,0,0" TextWrapping="Wrap" Text="{DynamicResource m_Height}" VerticalAlignment="Top" Height="22" Width="59" FontSize="16"/>
+        <TextBox x:Name="heightValue" HorizontalAlignment="Left" Height="23" Margin="127,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="43">
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder x:Name="textBox"/>
+                        <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+            <TextBox.Text>
+                <Binding Path="Height" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:StringToIntValidationRule ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock HorizontalAlignment="Left" Margin="44,99,0,0" TextWrapping="Wrap" Text="{DynamicResource m_Serum}" VerticalAlignment="Top" FontSize="16" Height="73" Width="87"/>
+        <TextBox x:Name="serumValue" HorizontalAlignment="Left" Height="37" Margin="127,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="43" RenderTransformOrigin="0.473,0.528">
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <StackPanel>
+                        <AdornedElementPlaceholder x:Name="textBox"/>
+                        <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+            <TextBox.Text>
+                <Binding Path="SerumValue" UpdateSourceTrigger="PropertyChanged" StringFormat="{}{0:#\,#}\,-}">
+                    <Binding.ValidationRules>
+                        <local:StringToDoubleValidationRule ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock HorizontalAlignment="Left" Margin="175,49,0,0" TextWrapping="Wrap" Text="{DynamicResource m_cmUnit}" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="-0.083,0.438"/>
+        <RadioButton x:Name="mgButton" Content="{DynamicResource m_SerumUnitOne}" HorizontalAlignment="Left" Margin="175,108,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <RadioButton x:Name="molButton" Content="{DynamicResource m_SerumUnitTwo}" HorizontalAlignment="Left" Margin="246,108,0,0" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="0.538,-0.721"/>
+        <TextBlock HorizontalAlignment="Left" Margin="44,255,0,0" TextWrapping="Wrap" Text="{DynamicResource m_GFR}" VerticalAlignment="Top" FontSize="20" Width="97" Height="32"/>
+        <TextBlock HorizontalAlignment="Left" Margin="44,19,0,0" TextWrapping="Wrap" Text="{DynamicResource m_Header}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="gfrValue" HorizontalAlignment="Left" Margin="111,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="219,261,0,0" TextWrapping="Wrap" Text="{DynamicResource m_Result}" VerticalAlignment="Top" FontSize="14"/>
+        <Button x:Name="calculateButton" Content="{DynamicResource m_Calculate}" HorizontalAlignment="Left" Margin="44,177,0,0" VerticalAlignment="Top" Width="75" Height="28" Click="calculateButton_Click"/>
+        <Button x:Name="resetButton" Content="{DynamicResource m_Reset}" HorizontalAlignment="Left" Margin="160,177,0,0" VerticalAlignment="Top" Width="81" Height="28" Click="resetButton_Click"/>
+        <Label x:Name="resultLabel" Content="" HorizontalAlignment="Left" Margin="175,255,0,0" VerticalAlignment="Top" Width="39"/>
+    </Grid>
+</Window>
